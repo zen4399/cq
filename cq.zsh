@@ -81,7 +81,17 @@ function _cq_send_tmux() {
         | awk '{print $1}' \
         | head -1)
 
-    [ -z "$claude_pane" ] && return 1
+    if [ -z "$claude_pane" ]; then
+        # No Claude Code pane found — auto-launch in a new split
+        echo "[cq] No Claude Code pane found. Launching..."
+        tmux split-window -h "claude --continue" 2>/dev/null
+        sleep 2
+        claude_pane=$(tmux list-panes -a -F '#{pane_id} #{pane_title}' 2>/dev/null \
+            | grep "Claude Code" \
+            | awk '{print $1}' \
+            | head -1)
+        [ -z "$claude_pane" ] && return 1
+    fi
 
     tmux send-keys -t "$claude_pane" "$input" Enter
     tmux select-pane -t "$claude_pane"
