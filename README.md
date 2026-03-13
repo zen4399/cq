@@ -2,6 +2,10 @@
 
 > Pipe any command output directly into your **existing** Claude Code session.
 
+```bash
+curl -fsSL https://raw.githubusercontent.com/zen4399/cq/main/install.sh | bash && source ~/.zshrc
+```
+
 ## The Problem
 
 Every time you hit an error, you:
@@ -41,6 +45,12 @@ cq gcc main.c              # pipes into EXISTING session (context preserved)
 
 ## Install
 
+**One-liner:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/zen4399/cq/main/install.sh | bash && source ~/.zshrc
+```
+
+**Or via git clone:**
 ```bash
 git clone https://github.com/zen4399/cq
 cd cq && ./install.sh
