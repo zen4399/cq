@@ -2,6 +2,8 @@
 
 > Pipe any command output directly into your **existing** Claude Code session.
 
+![demo](demo.gif)
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/zen4399/cq/main/install.sh | bash && source ~/.zshrc
 ```
