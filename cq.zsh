@@ -55,7 +55,17 @@ function _cq_send_wezterm() {
         | awk '{print $3}' \
         | head -1)
 
-    [ -z "$claude_pane" ] && return 1
+    if [ -z "$claude_pane" ]; then
+        # No Claude Code pane found — auto-launch in a new split
+        echo "[cq] No Claude Code pane found. Launching..."
+        wezterm cli split-pane --right -- claude --continue 2>/dev/null
+        sleep 2
+        claude_pane=$(wezterm cli list 2>/dev/null \
+            | grep "Claude Code" \
+            | awk '{print $3}' \
+            | head -1)
+        [ -z "$claude_pane" ] && return 1
+    fi
 
     wezterm cli send-text --pane-id "$claude_pane" "$input"$'\n'
     wezterm cli activate-pane --pane-id "$claude_pane"

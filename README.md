@@ -42,7 +42,7 @@ cq gcc main.c              # pipes into EXISTING session (context preserved)
 ## Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/cq
+git clone https://github.com/zen4399/cq
 cd cq && ./install.sh
 source ~/.zshrc
 ```
@@ -86,15 +86,17 @@ grep "ERROR" app.log | cq
 | iTerm2   | 🚧 Coming soon |
 | Others   | ⬇️ Falls back to `claude --continue` |
 
-## Fallback
+## Auto-launch
 
-If no Claude Code pane is detected, cq falls back to:
+If no Claude Code pane is detected, cq **automatically opens one** in a new split pane:
 
-```bash
-echo "$input" | claude --continue
+```
+[cq] No Claude Code pane found. Launching...
+→ WezTerm splits right, launches claude --continue
+→ Sends output to the new pane
 ```
 
-Context is preserved via `--continue`.
+No manual setup required. Just run `cq` and it handles everything.
 
 ## License
 
